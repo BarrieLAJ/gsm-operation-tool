@@ -8,6 +8,11 @@ import { Box, TextField } from "@mui/material";
 import { useForm } from "@refinedev/react-hook-form";
 import { IResourceComponentsProps } from "@refinedev/core";
 import { FieldValues } from "react-hook-form";
+import { ComponentProps, useRef } from "react";
+
+import { MaskedPattern } from "imask";
+
+import { IMaskInput } from "react-imask";
 
 export const VesselDetailCreate: React.FC<IResourceComponentsProps> = () => {
 	const {
@@ -15,10 +20,13 @@ export const VesselDetailCreate: React.FC<IResourceComponentsProps> = () => {
 		refineCore: { formLoading, onFinish },
 		handleSubmit,
 		register,
-		control,
 		formState: { errors },
 	} = useForm({});
-
+	const vesselNameMask = useRef<MaskedPattern>(
+		new MaskedPattern({
+			mask: "000-000",
+		})
+	);
 	const onFinishHandler = (data: FieldValues) => {
 		onFinish({
 			vessel_name: data.vessel_name,
@@ -104,6 +112,7 @@ export const VesselDetailCreate: React.FC<IResourceComponentsProps> = () => {
 					InputLabelProps={{ shrink: true }}
 					label={"Embark"}
 					name="embark"
+					placeholder="mm/dd/yyyy"
 				/>
 
 				{/*
