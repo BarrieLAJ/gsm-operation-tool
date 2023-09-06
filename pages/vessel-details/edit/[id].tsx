@@ -6,12 +6,15 @@ import { Edit } from "@refinedev/mui";
 import { Box, TextField } from "@mui/material";
 import { useForm } from "@refinedev/react-hook-form";
 import { IResourceComponentsProps } from "@refinedev/core";
-import { FieldValues } from "react-hook-form";
+import { FieldValues, Controller } from "react-hook-form";
+import NumberFormat from "react-number-format";
+import { convertFormatedNumberToNumber } from "src/util";
 
 export const VesselDetailEdit: React.FC<IResourceComponentsProps> = () => {
 	const {
 		saveButtonProps,
 		refineCore: { queryResult, onFinish },
+		control,
 		register,
 		handleSubmit,
 		formState: { errors },
@@ -24,8 +27,8 @@ export const VesselDetailEdit: React.FC<IResourceComponentsProps> = () => {
 			embark: data.embark,
 			disembark: data.disembark,
 			imo_number: data.imo_number,
-			feeding_cost: data.feeding_cost,
-			wages: data.wages,
+			feeding_cost: convertFormatedNumberToNumber(data.feeding_cost),
+			wages: convertFormatedNumberToNumber(data.wages),
 			vessel_email: data.vessel_email,
 			captain_name: data.captain_name,
 			vessel_owner: { name: data.vessel_owner_name, email: data.vessel_owner_email },
@@ -139,33 +142,51 @@ export const VesselDetailEdit: React.FC<IResourceComponentsProps> = () => {
 					label={"Disembark"}
 					name="disembark"
 				/>
-				<TextField
-					{...register("feeding_cost", {
-						required: "This field is required",
-						valueAsNumber: true,
-					})}
-					error={!!(errors as any)?.feeding_cost}
-					helperText={(errors as any)?.feeding_cost?.message}
-					margin="normal"
-					fullWidth
-					InputLabelProps={{ shrink: true }}
-					type="number"
-					label={"Feeding Cost"}
+				<Controller
+					control={control}
 					name="feeding_cost"
+					render={({ field: { onChange, name, value } }) => (
+						<NumberFormat
+							thousandsGroupStyle="thousand"
+							decimalSeparator="."
+							displayType="input"
+							type="text"
+							thousandSeparator={true}
+							value={value}
+							onChange={onChange}
+							customInput={TextField}
+							error={!!(errors as any)?.feeding_cost}
+							helperText={(errors as any)?.feeding_cost?.message}
+							margin="normal"
+							fullWidth
+							InputLabelProps={{ shrink: true }}
+							label={"Feeding Cost"}
+							name={name}
+						/>
+					)}
 				/>
-				<TextField
-					{...register("wages", {
-						required: "This field is required",
-						valueAsNumber: true,
-					})}
-					error={!!(errors as any)?.wages}
-					helperText={(errors as any)?.wages?.message}
-					margin="normal"
-					fullWidth
-					InputLabelProps={{ shrink: true }}
-					type="number"
-					label={"Wages"}
+				<Controller
+					control={control}
 					name="wages"
+					render={({ field: { onChange, name, value } }) => (
+						<NumberFormat
+							thousandsGroupStyle="thousand"
+							decimalSeparator="."
+							displayType="input"
+							type="text"
+							thousandSeparator={true}
+							value={value}
+							onChange={onChange}
+							customInput={TextField}
+							error={!!(errors as any)?.wages}
+							helperText={(errors as any)?.wages?.message}
+							margin="normal"
+							fullWidth
+							InputLabelProps={{ shrink: true }}
+							label={"Wages"}
+							name={name}
+						/>
+					)}
 				/>
 				<TextField
 					{...register("vessel_owner_name", {

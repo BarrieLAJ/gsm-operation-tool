@@ -60,7 +60,7 @@ export const VesselDetailList: React.FC<IResourceComponentsProps> = () => {
 				headerAlign: "center",
 				align: "center",
 				type: "number",
-				// minWidth: 200,
+				minWidth: 150,
 			},
 			{
 				field: "wages",
@@ -69,7 +69,7 @@ export const VesselDetailList: React.FC<IResourceComponentsProps> = () => {
 				headerAlign: "center",
 				align: "center",
 				type: "number",
-				// minWidth: 200,
+				minWidth: 150,
 			},
 			// {
 			// 	field: "imo_number",

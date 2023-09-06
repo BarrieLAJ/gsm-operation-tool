@@ -5,7 +5,7 @@ import { authProvider } from "src/authProvider";
 
 import { useShow, IResourceComponentsProps, useTranslate } from "@refinedev/core";
 import { Show, NumberField, DateField, TextFieldComponent as TextField, EmailField } from "@refinedev/mui";
-import { Typography, Stack } from "@mui/material";
+import { Typography, Stack, Box } from "@mui/material";
 
 export const VesselDetailShow: React.FC<IResourceComponentsProps> = () => {
 	const translate = useTranslate();
@@ -17,46 +17,76 @@ export const VesselDetailShow: React.FC<IResourceComponentsProps> = () => {
 	return (
 		<Show isLoading={isLoading}>
 			<Stack gap={1}>
-				<Typography variant="body1" fontWeight="bold">
-					ID
-				</Typography>
-				<NumberField value={record?.id ?? ""} />
-				<Typography variant="body1" fontWeight="bold">
-					Vessel Name
-				</Typography>
-				<TextField value={record?.vessel_name} />
-				<Typography variant="body1" fontWeight="bold">
-					ETA
-				</Typography>
-				<DateField value={record?.eta} />
-				<Typography variant="body1" fontWeight="bold">
-					Embark
-				</Typography>
-				<DateField value={record?.embark} />
-				<Typography variant="body1" fontWeight="bold">
-					Disembark
-				</Typography>
-				<DateField value={record?.disembark} />
-				<Typography variant="body1" fontWeight="bold">
-					Feeding Cost
-				</Typography>
-				<NumberField value={record?.feeding_cost ?? ""} />
-				<Typography variant="body1" fontWeight="bold">
-					Wages
-				</Typography>
-				<NumberField value={record?.wages ?? ""} prefix="SLE" />
-				<Typography variant="body1" fontWeight="bold">
-					Wages
-				</Typography>
-				<NumberField value={record?.wages ?? ""} />
-				<Typography variant="body1" fontWeight="bold">
-					Vessel Email
-				</Typography>
-				<EmailField value={record?.vessel_email} />
-				<Typography variant="body1" fontWeight="bold">
-					Captain Name
-				</Typography>
-				<TextField value={record?.captain_name} />
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						ID
+					</Typography>
+					<NumberField value={record?.id ?? ""} flex={6} />
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Vessel Name
+					</Typography>
+					<TextField value={record?.vessel_name} flex={6} />
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						ETA
+					</Typography>
+					<DateField value={record?.eta} flex={6} />
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Embark
+					</Typography>
+					<DateField value={record?.embark} flex={6} />
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Disembark
+					</Typography>
+					<DateField value={record?.disembark} flex={6} />
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Feeding Cost
+					</Typography>
+					<NumberField value={record?.feeding_cost ?? ""} flex={6} />
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Wages
+					</Typography>
+					<NumberField value={record?.wages ?? ""} prefix="SLE" flex={6} />
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Vessel Owner Name
+					</Typography>
+					<TextField value={record?.vessel_owner?.name ?? "-"} flex={6} />
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Vessel Owner Email
+					</Typography>
+					<Box flex={6}>
+						<EmailField value={record?.vessel_owner?.email ?? "-"} />
+					</Box>
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Vessel Email
+					</Typography>
+					<Box flex={6}>
+						<EmailField value={record?.vessel_email} />
+					</Box>
+				</Stack>
+				<Stack direction={"row"} width={"100%"} gap={2}>
+					<Typography variant="body2" flex={1} fontWeight="medium" bgcolor={"#efefef"} p={1}>
+						Captain Name
+					</Typography>
+					<TextField value={record?.captain_name} flex={6} />
+				</Stack>
 			</Stack>
 		</Show>
 	);
