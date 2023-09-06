@@ -3,11 +3,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { authProvider } from "src/authProvider";
 import React from "react";
 
-import { useDataGrid, EditButton, ShowButton, DeleteButton, List, DateField, EmailField } from "@refinedev/mui";
+import { useDataGrid, List, DateField } from "@refinedev/mui";
 import { DataGrid, GridColDef, GridRow, GridRowProps } from "@mui/x-data-grid";
-import { IResourceComponentsProps, useNavigation, useTranslate } from "@refinedev/core";
+import { IResourceComponentsProps, useNavigation } from "@refinedev/core";
 import { Box, Button } from "@mui/material";
-import { Edit, Shower } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
 
 export const VesselDetailList: React.FC<IResourceComponentsProps> = () => {
 	const { dataGridProps } = useDataGrid({});

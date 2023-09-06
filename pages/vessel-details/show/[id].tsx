@@ -1,4 +1,4 @@
-import { MuiShowInferencer } from "@refinedev/inferencer/mui";
+// import { MuiShowInferencer } from "@refinedev/inferencer/mui";
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { authProvider } from "src/authProvider";
