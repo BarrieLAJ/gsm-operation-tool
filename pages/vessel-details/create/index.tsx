@@ -37,7 +37,11 @@ export const VesselDetailCreate: React.FC<IResourceComponentsProps> = () => {
 	};
 
 	return (
-		<Create isLoading={formLoading} saveButtonProps={{ ...saveButtonProps, onClick: handleSubmit(onFinishHandler) }}>
+		<Create
+			isLoading={formLoading}
+			title="Add Vessel"
+			saveButtonProps={{ ...saveButtonProps, onClick: handleSubmit(onFinishHandler) }}
+		>
 			<Box component="form" sx={{ display: "flex", flexDirection: "column" }} autoComplete="off">
 				{/*
                     DatePicker component is not included in "@refinedev/mui" package.

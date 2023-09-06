@@ -3,12 +3,11 @@ import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { authProvider } from "src/authProvider";
 
-import { useShow, IResourceComponentsProps, useTranslate } from "@refinedev/core";
+import { useShow, IResourceComponentsProps } from "@refinedev/core";
 import { Show, NumberField, DateField, TextFieldComponent as TextField, EmailField } from "@refinedev/mui";
 import { Typography, Stack, Box } from "@mui/material";
 
 export const VesselDetailShow: React.FC<IResourceComponentsProps> = () => {
-	const translate = useTranslate();
 	const { queryResult } = useShow();
 	const { data, isLoading } = queryResult;
 
