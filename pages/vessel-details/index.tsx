@@ -4,10 +4,12 @@ import { authProvider } from "src/authProvider";
 import React from "react";
 
 import { useDataGrid, List, DateField } from "@refinedev/mui";
-import { DataGrid, GridColDef, GridRow, GridRowProps } from "@mui/x-data-grid";
+import { GridColDef, GridRow, GridRowProps } from "@mui/x-data-grid/";
 import { IResourceComponentsProps, useNavigation } from "@refinedev/core";
 import { Box, Button } from "@mui/material";
 import { Edit } from "@mui/icons-material";
+import dynamic from "next/dynamic";
+const DataGrid = dynamic(() => import("@components/commons/Table"), { ssr: false });
 
 export const VesselDetailList: React.FC<IResourceComponentsProps> = () => {
 	const { dataGridProps } = useDataGrid({});
