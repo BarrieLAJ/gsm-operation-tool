@@ -3,16 +3,12 @@ import DarkModeOutlined from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlined from "@mui/icons-material/LightModeOutlined";
 import AppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
-import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useGetIdentity } from "@refinedev/core";
 import { HamburgerMenu, RefineThemedLayoutV2HeaderProps } from "@refinedev/mui";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 

@@ -1,7 +1,6 @@
 import { AuthPage, ThemedTitleV2 } from "@refinedev/mui";
 
 import { GetServerSideProps } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { authProvider } from "src/authProvider";
 
@@ -16,8 +15,6 @@ Register.noLayout = true;
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
 	const { authenticated } = await authProvider.check(context);
 
-	const translateProps = await serverSideTranslations(context.locale ?? "en", ["common"]);
-
 	if (authenticated) {
 		return {
 			props: {},
@@ -29,8 +26,6 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
 	}
 
 	return {
-		props: {
-			...translateProps,
-		},
+		props: {},
 	};
 };

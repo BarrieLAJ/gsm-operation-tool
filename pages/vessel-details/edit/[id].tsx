@@ -271,12 +271,12 @@ export default VesselDetailEdit;
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
 	const { authenticated, redirectTo } = await authProvider.check(context);
 
-	const translateProps = await serverSideTranslations(context.locale ?? "en", ["common"]);
+	// const translateProps = await serverSideTranslations(context.locale ?? "en", ["common"]);
 
 	if (!authenticated) {
 		return {
 			props: {
-				...translateProps,
+				// ...translateProps,
 			},
 			redirect: {
 				destination: `${redirectTo}?to=${encodeURIComponent("/vessel-details")}`,
@@ -287,7 +287,7 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
 
 	return {
 		props: {
-			...translateProps,
+			// ...translateProps,
 		},
 	};
 };

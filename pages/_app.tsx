@@ -1,5 +1,4 @@
 import { Refine } from "@refinedev/core";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { notificationProvider, RefineSnackbarProvider, ThemedLayoutV2, ThemedTitleV2 } from "@refinedev/mui";
 import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from "@refinedev/nextjs-router";
 import type { NextPage } from "next";
@@ -10,7 +9,6 @@ import { ColorModeContextProvider } from "@contexts";
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import { dataProvider } from "@refinedev/supabase";
-import { appWithTranslation, useTranslation } from "next-i18next";
 import { authProvider } from "src/authProvider";
 import { AppIcon } from "src/components/app-icon";
 import { supabaseClient } from "src/utility";
@@ -38,56 +36,42 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout): JSX.Element {
 			</ThemedLayoutV2>
 		);
 	};
-
-	const { t, i18n } = useTranslation();
-
-	const i18nProvider = {
-		translate: (key: string, params: object) => t(key, params),
-		changeLocale: (lang: string) => i18n.changeLanguage(lang),
-		getLocale: () => i18n.language,
-	};
-
 	return (
 		<>
-			{/* <GitHubBanner /> */}
-			<RefineKbarProvider>
-				<ColorModeContextProvider>
-					<CssBaseline />
-					<GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
-					<RefineSnackbarProvider>
-						<Refine
-							routerProvider={routerProvider}
-							dataProvider={dataProvider(supabaseClient)}
-							authProvider={authProvider}
-							notificationProvider={notificationProvider}
-							i18nProvider={i18nProvider}
-							resources={[
-								{
-									name: "vessel-details",
-									list: "/vessel-details",
-									create: "/vessel-details/create",
-									edit: "/vessel-details/edit/:id",
-									show: "/vessel-details/show/:id",
-									meta: {
-										canDelete: true,
-									},
+			<ColorModeContextProvider>
+				<CssBaseline />
+				<GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
+				<RefineSnackbarProvider>
+					<Refine
+						routerProvider={routerProvider}
+						dataProvider={dataProvider(supabaseClient)}
+						authProvider={authProvider}
+						notificationProvider={notificationProvider}
+						resources={[
+							{
+								name: "vessel-details",
+								list: "/vessel-details",
+								create: "/vessel-details/create",
+								edit: "/vessel-details/edit/:id",
+								show: "/vessel-details/show/:id",
+								meta: {
+									canDelete: true,
 								},
-							]}
-							options={{
-								syncWithLocation: true,
-								warnWhenUnsavedChanges: true,
-							}}
-						>
-							{renderComponent()}
-							<RefineKbar />
-							<UnsavedChangesNotifier />
-							<DocumentTitleHandler />
-						</Refine>
-					</RefineSnackbarProvider>
-				</ColorModeContextProvider>
-			</RefineKbarProvider>
+							},
+						]}
+						options={{
+							syncWithLocation: true,
+							warnWhenUnsavedChanges: true,
+						}}
+					>
+						{renderComponent()}
+						<UnsavedChangesNotifier />
+						<DocumentTitleHandler />
+					</Refine>
+				</RefineSnackbarProvider>
+			</ColorModeContextProvider>
 		</>
 	);
 }
 
-export default appWithTranslation(MyApp);
+export default MyApp;

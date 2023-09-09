@@ -9,7 +9,7 @@ import { IResourceComponentsProps, useNavigation } from "@refinedev/core";
 import { Box, Button } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import dynamic from "next/dynamic";
-// const DataGrid = dynamic(() => import("@components/commons/Table"), { ssr: false });
+const DataGrid = dynamic(() => import("@components/commons/Table"));
 
 const columns: GridColDef[] = [
 	{
@@ -79,12 +79,10 @@ const columns: GridColDef[] = [
 		type: "actions",
 		sortable: false,
 		renderCell: function render({ row }) {
-			const { show, edit } = useNavigation();
+			const { edit } = useNavigation();
 			return (
 				<>
 					<Button
-						// hideText
-						// recordItemId={row.id}
 						onMouseDown={(e) => {
 							e.stopPropagation();
 						}}
@@ -108,7 +106,7 @@ export const VesselDetailList: React.FC<IResourceComponentsProps> = () => {
 	const { dataGridProps } = useDataGrid({});
 	return (
 		<List>
-			{/* <DataGrid
+			<DataGrid
 				{...dataGridProps}
 				columns={columns}
 				autoHeight
@@ -142,7 +140,7 @@ export const VesselDetailList: React.FC<IResourceComponentsProps> = () => {
 						);
 					},
 				}}
-			/> */}
+			/>
 		</List>
 	);
 };
@@ -151,14 +149,9 @@ export default VesselDetailList;
 
 export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
 	const { authenticated, redirectTo } = await authProvider.check(context);
-
-	const translateProps = await serverSideTranslations(context.locale ?? "en", ["common"]);
-
 	if (!authenticated) {
 		return {
-			props: {
-				...translateProps,
-			},
+			props: {},
 			redirect: {
 				destination: `${redirectTo}?to=${encodeURIComponent("/vessel-details")}`,
 				permanent: false,
@@ -167,8 +160,6 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
 	}
 
 	return {
-		props: {
-			...translateProps,
-		},
+		props: {},
 	};
 };
