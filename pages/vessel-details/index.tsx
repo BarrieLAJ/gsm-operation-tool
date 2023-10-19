@@ -103,14 +103,14 @@ const columns: GridColDef[] = [
 ];
 
 export const VesselDetailList: React.FC<IResourceComponentsProps> = () => {
-	const { dataGridProps } = useDataGrid({});
+	const { dataGridProps } = useDataGrid({ meta: { count: "estimated" } });
 	return (
 		<List>
 			<DataGrid
-				{...dataGridProps}
 				columns={columns}
 				autoHeight
 				disableColumnSelector
+				{...dataGridProps}
 				slotProps={{
 					row: {
 						sx: {
